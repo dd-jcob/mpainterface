@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0; /* Remove default margin */
+    }
+
+    .header {
+      background-color: #006400;
+      color: white;
+      text-align: center;
+      padding: 30px 10px;
+      position: relative;
+      display: none;
+    }
+
+    .avatar-container {
+      display: flex;
+      flex-direction: column;
+      height: 460px;
+      width: 300px;
+      border: 1px solid #ccc; /* 设置整个容器的边框 */
+      margin: 0 auto;
+      padding: 0px;
+    }
+
+    .avatar-group {
+      margin-top: 20px; /* 上边距 */
+      margin-left: 30px; /* 左边距 */
+    }
+
+    .avatar-wrapper {
+      display: flex;
+      align-items: center; /* 垂直居中对齐 */
+      cursor: pointer;
+      transition: background-color 0.3s;
+      padding: 10px;
+      margin-bottom: 5px; /* 调整头像组之间的垂直间距 */
+    }
+
+    .avatar-wrapper:hover {
+      background-color: #e0e0e0;
+    }
+
+    .avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 10px; /* 调整头像和文字之间的水平间距 */
+    }
+
+    .avatar-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start; /* 左对齐 */
+    }
+
+    .avatar-name {
+      font-weight: bold; /* 加粗字体 */
+      margin-bottom: 2px; /* 调整名字和小字的垂直间距 */
+    }
+
+    .auto-reply {
+      font-size: smaller; /* 小一号的字体 */
+      color: #ccc; /* 浅灰色 */
+    }
+
+    #select-page h1 {
+      background-color: #006400;
+      color: white;
+      padding: 10px;
+      width: 280px; /* 绿色部分宽度 */
+      margin: 0px;
+      border-bottom: 1px solid #ccc; /* 设置绿色部分的底边框 */
+      text-align: left;
+      font-size: 20px;
+    }
+
+    #chat-page h2 {
+      background-color: #006400;
+      color: white;
+      padding: 10px;
+      width: 600px;
+      margin: 0;
+      text-align: left;
+      font-size: 20px;
+    }
+
+    .chat-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 430px;
+      width: 630px;
+      border: 1px solid #ccc;
+      margin: 0 auto;
+      padding: 10px;
+    }
+
+    .chat-box {
+      border: 1px solid #ccc;
+      height: 400px;
+      width: 600px;
+      overflow-y: scroll;
+      padding: 10px;
+      margin: 0 auto;
+    }
+
+    .message-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .left-message {
+      justify-content: flex-start;
+    }
+
+    .right-message {
+      justify-content: flex-end;
+    }
+
+    .message-bubble {
+      max-width: 70%;
+      padding: 8px;
+      border-radius: 8px;
+      word-wrap: break-word;
+      text-align: left;
+    }
+
+    .message-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    #message-input-container {
+      display: flex;
+      width: 300px;
+      margin-top: 10px;
+      
+    }
+
+    #message-input {
+      flex: 1;
+      height: 25px;
+      margin-right: 5px;
+
+    }
+
+    #send-button {
+      height: 30px;
+      cursor: pointer;
+    }
+
+    #manual-service-button {
+      height: 30px;
+      cursor: pointer;
+    }
+
+    .right-message .message-bubble {
+      background-color: #ccffcc; /* 浅绿色 */
+    }
+
+    .left-message .message-bubble {
+      background-color: #add8e6; /* 浅蓝色 */
+    }
+
+    .avatar-container .green-area {
+      display: none;
+    }
+  </style>
+  <title>智能客服对话页面</title>
+</head>
+
+<body>
+
+  <div class="header"></div>
+
+  <!-- 选择页面 -->
+  <div id="select-page" class="avatar-container">
+    <h1>选择智能客服</h1>
+    <div class="avatar-group">
+      <div class="avatar-wrapper" onclick="startChat('S001')">
+        <img src="avatar1.png" alt="Chatbot S001" class="avatar">
+        <div class="avatar-info">
+          <span class="avatar-name">智能客服S001</span>
+          <span class="auto-reply">24小时自动回复</span>
+        </div>
+      </div>
+      <div class="avatar-wrapper" onclick="startChat('S002')">
+        <img src="avatar2.png" alt="Chatbot S002" class="avatar">
+        <div class="avatar-info">
+          <span class="avatar-name">智能客服S002</span>
+          <span class="auto-reply">24小时自动回复</span>
+        </div>
+      </div>
+      <div class="avatar-wrapper" onclick="startChat('S003')">
+        <img src="avatar3.png" alt="Chatbot S003" class="avatar">
+        <div class="avatar-info">
+          <span class="avatar-name">智能客服S003</span>
+          <span class="auto-reply">24小时自动回复</span>
+        </div>
+      </div>
+      <div class="avatar-wrapper" onclick="startChat('S004')">
+        <img src="avatar4.png" alt="Chatbot S004" class="avatar">
+        <div class="avatar-info">
+          <span class="avatar-name">智能客服S004</span>
+          <span class="auto-reply">24小时自动回复</span>
+        </div>
+      </div>
+      <div class="avatar-wrapper" onclick="startChat('S005')">
+        <img src="avatar5.png" alt="Chatbot S005" class="avatar">
+        <div class="avatar-info">
+          <span class="avatar-name">智能客服S005</span>
+          <span class="auto-reply">24小时自动回复</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 对话页面 -->
+  <div id="chat-page" style="display: none;" class="chat-container">
+    <h2 id="chat-title"></h2>
+    <div id="chat-box" class="chat-box"></div>
+    <div id="message-input-container">
+      <input type="text" id="message-input" placeholder="请输入您的问题">
+      <button id="send-button" onclick="sendMessage()">发送</button>
+      <button id="manual-service-button" onclick="initiateManualService()">人工服务</button>
+    </div>
+  </div>
+
+  <script>
+    let currentChatbot = null;
+
+    function startChat(chatbotName) {
+      currentChatbot = {
+        name: chatbotName,
+        sendMessage: function (message) {
+          const greeting = `我是智能客服${chatbotName}，很高兴为您服务！`;
+          displayMessage(greeting, 'left', `avatar${chatbotName.charAt(chatbotName.length - 1)}`);
+        }
+      };
+
+      document.getElementById('chat-box').innerHTML = '';
+
+      document.getElementById('select-page').style.display = 'none';
+      document.getElementById('chat-page').style.display = 'flex';
+      document.getElementById('chat-title').innerText = `智能客服${chatbotName}对话中`;
+
+      setTimeout(() => {
+        currentChatbot.sendMessage('');
+      }, 500);
+    }
+
+    function sendMessage() {
+      const messageInput = document.getElementById('message-input').value;
+      if (messageInput.trim() === '') {
+        return;
+      }
+
+      if (currentChatbot) {
+        displayMessage(`${messageInput}`, 'right', `avatar${currentChatbot.name.charAt(currentChatbot.name.length - 1)}`);
+        const reply = `感谢您的问题，我们会尽快回复！`;
+        displayMessage(reply, 'left', `avatar${currentChatbot.name.charAt(currentChatbot.name.length - 1)}`);
+      }
+
+      document.getElementById('message-input').value = '';
+    }
+
+    function displayMessage(message, sender, avatarClass) {
+      const chatBox = document.getElementById('chat-box');
+      const messageContainer = document.createElement('div');
+      messageContainer.classList.add('message-container');
+      messageContainer.classList.add(sender === 'left' ? 'left-message' : 'right-message');
+
+      if (sender === 'left') {
+        const avatar = document.createElement('img');
+        avatar.src = `${avatarClass}.png`;
+        avatar.alt = 'Avatar';
+        avatar.classList.add('message-avatar');
+        messageContainer.appendChild(avatar);
+      }
+
+      const messageBubble = document.createElement('div');
+      messageBubble.classList.add('message-bubble');
+      messageBubble.innerText = message;
+
+      messageContainer.appendChild(messageBubble);
+      chatBox.appendChild(messageContainer);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function initiateManualService() {
+      if (currentChatbot) {
+        const manualServiceMessage = "正在为您转接人工服务，请稍后...";
+        displayMessage(manualServiceMessage, 'left', `avatar${currentChatbot.name.charAt(currentChatbot.name.length - 1)}`);
+      }
+    }
+  </script>
+
+</body>
+
+</html>
